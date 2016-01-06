@@ -1,1 +1,1 @@
-var feedReader = angular.module('feedReader', ['feedReader.feedItems']);
+angular.module('feedReader', ['feedReader.feedItems']);
