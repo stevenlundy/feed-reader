@@ -1,1 +1,4 @@
-
+<h2>{{ feed.title }}</h2>
+<p>{{ feed.description }}</p>
+<ul>
+  <li ng-repeat="entry in feed.entries"><a href="{{entry.link}}">{{entry.title}}</a></li>
