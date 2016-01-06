@@ -1,4 +1,4 @@
-var feedItems = angular.module('feedReader.feedItems', ['feedReader.feedServices']);
+var feedItems = angular.module('feedReader.feedItems', ['feedReader.feedServices', 'feedReader.itemSummary', 'feedReader.itemDetail']);
 
 feedItems.controller('FeedItemsController', ['$scope', 'feedsAPI', function ($scope, feedsAPI) {
   // Use service to get RSS items from $scope.url;
@@ -6,6 +6,11 @@ feedItems.controller('FeedItemsController', ['$scope', 'feedsAPI', function ($sc
   feedsAPI.getFeed($scope.url).then(function (feed) {
     $scope.feed = feed;
   });
+
+  $scope.selected;
+  $scope.selectEntry = function(index) {
+    $scope.selected = index;
+  };
 }])
 .directive('feedItems', function() {
   return {
@@ -16,4 +21,4 @@ feedItems.controller('FeedItemsController', ['$scope', 'feedsAPI', function ($sc
     },
     templateUrl: 'app/views/feedItems.html',
   };
-})
+});
