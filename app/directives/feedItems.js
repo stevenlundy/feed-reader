@@ -1,12 +1,22 @@
 angular.module('feedReader.feedItems', ['feedReader.feedServices', 'feedReader.itemSummary', 'feedReader.itemDetail'])
-  .controller('FeedItemsController', ['$scope', 'feedsAPI', function ($scope, feedsAPI) {
-    // Use service to get RSS items from $scope.url;
-    $scope.feed = {};
-    feedsAPI.getFeed($scope.url).then(function (feed) {
-      $scope.feed = feed;
-      $scope.feed.entries.forEach(function(entry) {
-        entry.thumbnail = getThumbnail(entry);
+  .controller('FeedItemsController', ['$scope', '$location', 'feedsAPI', function ($scope, $location, feedsAPI) {
+    $scope.getFeeds = function(){
+      // Use service to get RSS items from $scope.url;
+      $scope.feed = {};
+      $scope.selected = null;
+      $scope.error = null;
+      feedsAPI.getFeed($scope.url).then(function (feed) {
+        $scope.feed = feed;
+        $scope.feed.entries.forEach(function(entry) {
+          entry.thumbnail = getThumbnail(entry);
+        });
+      }).catch(function (error) {
+        $scope.error = 'There\'s something wrong with your feed. Please check the url or try reloading the page.';
       });
+    };
+
+    $scope.$watch('url', function(){
+      $scope.getFeeds();
     });
 
     var getThumbnail = function(entry) {
@@ -31,19 +41,24 @@ angular.module('feedReader.feedItems', ['feedReader.feedServices', 'feedReader.i
         return images[1];
       }
 
-    }
+    };
 
-    $scope.selected;
     $scope.selectEntry = function(index) {
       $scope.selected = index;
     };
+
+    $scope.$on('$locationChangeSuccess', function(e, newUrl, oldUrl) {
+      $scope.selected = parseInt($location.path().split('/')[2]);
+    });
+
   }])
   .directive('feedItems', function() {
     return {
       restrict: 'E',
       controller: 'FeedItemsController',
       scope: {
-        url: '@'
+        url: '@',
+        name: '@'
       },
       templateUrl: 'app/views/feedItems.html',
     };

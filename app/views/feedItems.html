@@ -1,8 +1,11 @@
-<h2>{{ feed.title }}</h2>
-<p>{{ feed.description }}</p>
-<ul>
-  <li ng-repeat="entry in feed.entries track by $index">
-    <item-summary entry="entry" ng-hide="$index === selected" ng-click="selectEntry($index)"></item-summary>
-    <item-detail entry="entry" ng-show="$index === selected"></item-detail>
-  </li>
-</ul>
+<div class="alert alert-danger" ng-show="error">{{ error }}</div>
+<div class="well" ng-hide="error">
+  <h2>{{ feed.title }}</h2>
+  <p>{{ feed.description }}</p>
+  <a href="{{ feed.link }}" class="btn btn-primary">Visit website</a>
+</div>
+
+<div class="row" ng-repeat="entry in feed.entries track by $index">
+  <item-summary entry="entry" name="{{name}}" index="{{$index}}" ng-hide="$index === selected"></item-summary>
+  <item-detail entry="entry" ng-show="$index === selected"></item-detail>
+</div>

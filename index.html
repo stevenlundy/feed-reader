@@ -10,15 +10,32 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap.js"></script>
   <script src="app/services/feed.js"></script>
   <script src="app/directives/feedItems.js"></script>
   <script src="app/directives/itemSummary.js"></script>
   <script src="app/directives/itemDetail.js"></script>
+  <script src="app/controllers/feedManager.js"></script>
   <script src="app/app.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <feed-items url="http://feeds.feedburner.com/tedtalks_video"></feed-items>
-  <feed-items url="http://xkcd.com/rss.xml"></feed-items>
+  <div class="container" ng-controller="feedManagerController">
+    <div class="header clearfix navbar navbar-default">
+      <ul class="nav navbar-nav pull-right">
+        <li uib-dropdown >
+          <a href="#" id="feedlist-dropdown" uib-dropdown-toggle>{{ selectedFeed.name }} <span class="caret"></span></a>
+          <ul class="uib-dropdown-menu" role="menu" aria-labelledby="feedlist-dropdown">
+            <li ng-repeat="feed in feeds"><a href="#{{feed.name}}">{{ feed.name }}</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a href="#" class="navbar-brand">Feed Reader</a>
+    </div>
+    <div class="row">
+      <feed-items class="col-xs-12" url="{{selectedFeed.url}}" name="{{selectedFeed.name}}"></feed-items>
+    </div>
+  </div>
 </body>
 </html>
