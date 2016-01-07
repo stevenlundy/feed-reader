@@ -10,6 +10,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap.js"></script>
   <script src="app/services/feed.js"></script>
   <script src="app/directives/feedItems.js"></script>
   <script src="app/directives/itemSummary.js"></script>
@@ -21,16 +22,19 @@
 </head>
 <body>
   <div class="container" ng-controller="feedManagerController">
-    <div class="header clearfix">
-      <nav class="navbar navbar-default">
-        <select class="nav pull-right" ng-model="feedUrl">
-          <option ng-repeat="feed in feeds" value="{{feed.url}}" ng-selected="feed.url === feedUrl">{{ feed.name }}</option>
-        </select>
-        <a href="#" class="navbar-brand">Feed Reader</a>
-      </nav>
+    <div class="header clearfix navbar navbar-default">
+      <ul class="nav navbar-nav pull-right">
+        <li uib-dropdown >
+          <a href="#" id="feedlist-dropdown" uib-dropdown-toggle>{{ selectedFeed.name }} <span class="caret"></span></a>
+          <ul class="uib-dropdown-menu" role="menu" aria-labelledby="feedlist-dropdown">
+            <li ng-repeat="feed in feeds" ng-click="setFeed(feed)"><a href="#{{feed.name}}">{{ feed.name }}</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a href="#" class="navbar-brand">Feed Reader</a>
     </div>
     <div class="row">
-      <feed-items class="col-xs-12" url="{{feedUrl}}"></feed-items>
+      <feed-items class="col-xs-12" url="{{selectedFeed.url}}"></feed-items>
     </div>
   </div>
 </body>

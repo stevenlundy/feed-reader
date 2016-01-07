@@ -1,5 +1,5 @@
-angular.module('feedReader.feedManager', [])
-  .controller('feedManagerController', ['$scope', function ($scope) {
+angular.module('feedReader.feedManager', ['ui.bootstrap'])
+  .controller('feedManagerController', ['$scope', '$location', function ($scope, $location) {
     $scope.feeds = [
       {
         name: 'TEDTalks',
@@ -18,5 +18,9 @@ angular.module('feedReader.feedManager', [])
         url: 'google.com'
       }
     ];
-    $scope.feedUrl = $scope.feeds[0].url;
+    $scope.selectedFeed = $scope.feeds[0];
+    $scope.setFeed = function(feed) {
+      $scope.selectedFeed = feed;
+    };
+
   }]);
