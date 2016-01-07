@@ -6,21 +6,27 @@ item-summary .stats .published-date:before {
   content: "/ ";
 }
 
+item-summary .thumbnail a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 item-summary .thumbnail {
   background-size: cover;
   overflow: hidden;
   background-repeat: no-repeat;
   background-position: 50% 25%;
-  margin-left: 15px;
 }
 
-item-summary .thumbnail.col-xs-6 {
-  width: 47%;
+item-summary .thumbnail.col-xs-12 {
+  margin-left: 0;
   height: 200px;
 }
 
 @media (min-width: 768px) {
   item-summary .thumbnail.col-sm-4 {
+    margin-left: 15px;
     width: 31.33%;
     height: 160px;
   }
@@ -28,6 +34,7 @@ item-summary .thumbnail.col-xs-6 {
 
 @media (min-width: 992px) {
   item-summary .thumbnail.col-md-3 {
+    margin-left: 15px;
     width: 23%;
     height: 140px;
   }
@@ -35,6 +42,7 @@ item-summary .thumbnail.col-xs-6 {
 
 @media (min-width: 1200px) {
   item-summary .thumbnail.col-lg-2 {
+    margin-left: 15px;
     width: 13%;
     height: 120px;
   }
