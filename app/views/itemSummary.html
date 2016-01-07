@@ -1,6 +1,6 @@
 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 thumbnail" ng-style="{'background-image': 'url(\''+entry.thumbnail+'\')'}" title="{{entry.title}}"></div>
 <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10">
-  <h3>{{entry.title}}</h3>
+  <h3><a href="#{{name + '/' + index}}">{{entry.title}}</a></h3>
   <p>{{entry.contentSnippet}}</p>
   <div class='stats text-muted'>
     <span class='author'>{{entry.author}}</span>

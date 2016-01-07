@@ -1,5 +1,5 @@
 angular.module('feedReader.feedItems', ['feedReader.feedServices', 'feedReader.itemSummary', 'feedReader.itemDetail'])
-  .controller('FeedItemsController', ['$scope', 'feedsAPI', function ($scope, feedsAPI) {
+  .controller('FeedItemsController', ['$scope', '$location', 'feedsAPI', function ($scope, $location, feedsAPI) {
     $scope.getFeeds = function(){
       // Use service to get RSS items from $scope.url;
       $scope.feed = {};
@@ -46,13 +46,19 @@ angular.module('feedReader.feedItems', ['feedReader.feedServices', 'feedReader.i
     $scope.selectEntry = function(index) {
       $scope.selected = index;
     };
+
+    $scope.$on('$locationChangeSuccess', function(e, newUrl, oldUrl) {
+      $scope.selected = parseInt($location.path().split('/')[2]);
+    });
+
   }])
   .directive('feedItems', function() {
     return {
       restrict: 'E',
       controller: 'FeedItemsController',
       scope: {
-        url: '@'
+        url: '@',
+        name: '@'
       },
       templateUrl: 'app/views/feedItems.html',
     };

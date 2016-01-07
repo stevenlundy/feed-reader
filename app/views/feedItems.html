@@ -6,6 +6,6 @@
 </div>
 
 <div class="row" ng-repeat="entry in feed.entries track by $index">
-  <item-summary entry="entry" ng-hide="$index === selected" ng-click="selectEntry($index)"></item-summary>
+  <item-summary entry="entry" name="{{name}}" index="{{$index}}" ng-hide="$index === selected"></item-summary>
   <item-detail entry="entry" ng-show="$index === selected"></item-detail>
 </div>

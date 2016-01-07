@@ -3,7 +3,9 @@ angular.module('feedReader.itemSummary', ['angularMoment'])
     return {
       restrict: 'E',
       scope: {
-        entry: '='
+        entry: '=',
+        name: '@',
+        index: '@'
       },
       templateUrl: 'app/views/itemSummary.html',
     };
