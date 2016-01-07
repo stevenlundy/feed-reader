@@ -1,4 +1,4 @@
-angular.module('feedReader.itemSummary', [])
+angular.module('feedReader.itemSummary', ['angularMoment'])
   .directive('itemSummary', function() {
     return {
       restrict: 'E',

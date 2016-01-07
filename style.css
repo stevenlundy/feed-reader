@@ -1,0 +1,12 @@
+item-summary .stats .author:before {
+  content: "by ";
+}
+
+item-summary .stats .published-date:before {
+  content: "/ ";
+}
+
+item-summary .thumbnail {
+  height: 80px;
+  float: left;
+}
