@@ -14,11 +14,17 @@
   <script src="app/directives/feedItems.js"></script>
   <script src="app/directives/itemSummary.js"></script>
   <script src="app/directives/itemDetail.js"></script>
+  <script src="app/controllers/feedManager.js"></script>
   <script src="app/app.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <feed-items url="http://feeds.feedburner.com/tedtalks_video"></feed-items>
-  <feed-items url="http://xkcd.com/rss.xml"></feed-items>
+
+  <div ng-controller="feedManagerController">
+    <select ng-model="feedUrl">
+      <option ng-repeat="feed in feeds" value="{{feed.url}}" ng-selected="feed.url === feedUrl">{{ feed.name }}</option>
+    </select>
+    <feed-items url="{{feedUrl}}"></feed-items>
+  </div>
 </body>
 </html>

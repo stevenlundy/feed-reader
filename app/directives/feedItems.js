@@ -1,12 +1,19 @@
 angular.module('feedReader.feedItems', ['feedReader.feedServices', 'feedReader.itemSummary', 'feedReader.itemDetail'])
   .controller('FeedItemsController', ['$scope', 'feedsAPI', function ($scope, feedsAPI) {
-    // Use service to get RSS items from $scope.url;
-    $scope.feed = {};
-    feedsAPI.getFeed($scope.url).then(function (feed) {
-      $scope.feed = feed;
-      $scope.feed.entries.forEach(function(entry) {
-        entry.thumbnail = getThumbnail(entry);
+    $scope.getFeeds = function(){
+      // Use service to get RSS items from $scope.url;
+      $scope.feed = {};
+      $scope.selected = null;
+      feedsAPI.getFeed($scope.url).then(function (feed) {
+        $scope.feed = feed;
+        $scope.feed.entries.forEach(function(entry) {
+          entry.thumbnail = getThumbnail(entry);
+        });
       });
+    };
+
+    $scope.$watch('url', function(){
+      $scope.getFeeds();
     });
 
     var getThumbnail = function(entry) {
@@ -31,9 +38,8 @@ angular.module('feedReader.feedItems', ['feedReader.feedServices', 'feedReader.i
         return images[1];
       }
 
-    }
+    };
 
-    $scope.selected;
     $scope.selectEntry = function(index) {
       $scope.selected = index;
     };
