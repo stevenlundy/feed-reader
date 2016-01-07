@@ -1,3 +1,13 @@
-<h2>{{ entry.title }}</h2>
-<span>{{ entry.author }}</span>
+<h3><a href="{{ entry.link }}">{{ entry.title }}</a></h3>
+<div>Published by
+  <span class="author">{{ entry.author }}</span>
+  on <span class="published-date">
+    <time>{{ entry.publishedDate | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}</time>
+  </span>
+</div>
 <div ng-bind-html="entry.content | to_trusted"></div>
+<div ng-repeat="mediaGroup in entry.mediaGroups">
+  <div ng-repeat="content in mediaGroup.contents">
+    <a href="{{ content.url }}"><img ng-src={{content.thumbnails[0].url}}></a>
+  </div>
+</div>
