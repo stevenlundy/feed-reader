@@ -4,7 +4,34 @@ angular.module('feedReader.feedItems', ['feedReader.feedServices', 'feedReader.i
     $scope.feed = {};
     feedsAPI.getFeed($scope.url).then(function (feed) {
       $scope.feed = feed;
+      $scope.feed.entries.forEach(function(entry) {
+        entry.thumbnail = getThumbnail(entry);
+      });
     });
+
+    var getThumbnail = function(entry) {
+      // Find first image in any mediaGroup item
+      // This is not necessary for the TED video feed
+      // where the thumbnail is always at entry.mediaGroups[0].contents[0].thumbnails[0].url,
+      // But it makes it more general
+      for (var i = 0; i < (entry.mediaGroups || []).length; i++) {
+        for (var j = 0; j < (entry.mediaGroups[i].contents || []).length; j++) {
+          for (var k = 0; k < (entry.mediaGroups[i].contents[j].thumbnails || []).length; k++) {
+            if(entry.mediaGroups[i].contents[j].thumbnails[k].url) {
+              return entry.mediaGroups[i].contents[j].thumbnails[k].url
+            }
+          }
+        }
+      }
+
+      // Find first image in content
+      var pattern = /<img\b[^>]+?src\s*=\s*['"]?([^\s'"?#>]+)/;
+      var images = entry.content.match(pattern);
+      if (images) {
+        return images[1];
+      }
+
+    }
 
     $scope.selected;
     $scope.selectEntry = function(index) {

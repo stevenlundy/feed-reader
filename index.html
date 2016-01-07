@@ -8,13 +8,17 @@
     google.load("feeds", "1");
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
   <script src="app/services/feed.js"></script>
   <script src="app/directives/feedItems.js"></script>
   <script src="app/directives/itemSummary.js"></script>
   <script src="app/directives/itemDetail.js"></script>
   <script src="app/app.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <feed-items url="http://feeds.feedburner.com/tedtalks_video"></feed-items>
+  <feed-items url="http://xkcd.com/rss.xml"></feed-items>
 </body>
 </html>
