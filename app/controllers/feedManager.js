@@ -14,6 +14,10 @@ angular.module('feedReader.feedManager', ['ui.bootstrap'])
         url: 'http://www.theguardian.com/uk/rss'
       },
       {
+        name: 'Radio Lab',
+        url: 'http://feeds.wnyc.org/radiolab'
+      },
+      {
         name: 'Bad Feed',
         url: 'google.com'
       }

@@ -12,12 +12,8 @@
     <div class="panel-body">
       <div ng-bind-html="entry.content | to_trusted"></div>
     </div>
-    <div class="panel-body" ng-show="entry.mediaGroups">
-      <div ng-repeat="mediaGroup in entry.mediaGroups">
-        <div ng-repeat="content in mediaGroup.contents">
-          <a href="{{ content.url }}"><img class="img-responsive" ng-src={{content.thumbnails[0].url}}></a>
-        </div>
-      </div>
+    <div class="panel-body" ng-repeat="mediaGroup in entry.mediaGroups">
+      <media-group-display media="mediaGroup"></media-group>
     </div>
     <div class="panel-body">
       <a href="{{ entry.link }}" class="btn btn-default btn-block">Visit Website</a>
