@@ -1,4 +1,4 @@
-angular.module('feedReader.itemDetail', [])
+angular.module('feedReader.itemDetail', ['feedReader.mediaGroupDisplay'])
   .directive('itemDetail', function() {
     return {
       restrict: 'E',
