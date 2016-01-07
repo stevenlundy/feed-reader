@@ -3,7 +3,7 @@ angular.module('feedReader.feedItems', ['feedReader.feedServices', 'feedReader.i
     $scope.getFeeds = function(){
       // Use service to get RSS items from $scope.url;
       $scope.feed = {};
-      $scope.selected = null;
+      setSelectedFromPath();
       $scope.error = null;
       feedsAPI.getFeed($scope.url).then(function (feed) {
         $scope.feed = feed;
@@ -43,14 +43,11 @@ angular.module('feedReader.feedItems', ['feedReader.feedServices', 'feedReader.i
 
     };
 
-    $scope.selectEntry = function(index) {
-      $scope.selected = index;
+    var setSelectedFromPath = function() {
+      $scope.selected = parseInt($location.path().split('/')[2]);
     };
 
-    $scope.$on('$locationChangeSuccess', function(e, newUrl, oldUrl) {
-      $scope.selected = parseInt($location.path().split('/')[2]);
-    });
-
+    $scope.$on('$locationChangeSuccess', setSelectedFromPath);
   }])
   .directive('feedItems', function() {
     return {
