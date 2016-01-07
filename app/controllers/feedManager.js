@@ -24,12 +24,24 @@ angular.module('feedReader.feedManager', ['ui.bootstrap'])
     };
 
     $scope.$on('$locationChangeSuccess', function(e, newUrl, oldUrl) {
-      var feedName = $location.path().split('/')[1] || $scope.feeds[0].name;
-      $scope.feeds.forEach(function(feed) {
-        if(feed.name === feedName) {
-          $scope.setFeed(feed);
-        }
-      });
+      var foundFeed = false;
+      if($location.path().split('/')[1]) {
+        var feedName = $location.path().split('/')[1];
+        $scope.feeds.forEach(function(feed) {
+          if(feed.name === feedName) {
+            $scope.setFeed(feed);
+            foundFeed = true;
+          }
+        });
+      } else {
+        $scope.setFeed($scope.feeds[0]);
+        foundFeed = true;
+      }
+      if(!foundFeed){
+        // Redirect to home page
+        $location.path('');
+      }
+
     });
 
   }]);
