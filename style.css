@@ -7,6 +7,12 @@ item-summary .stats .published-date:before {
 }
 
 item-summary .thumbnail {
-  height: 80px;
+  width: 200px;
+  height: 110px;
+  background-size: cover;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: 50% 25%;
   float: left;
+  clear: both;
 }
