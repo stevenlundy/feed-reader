@@ -2,7 +2,7 @@
 <div class="well" ng-hide="error">
   <h2>{{ feed.title }}</h2>
   <p>{{ feed.description }}</p>
-  <a href="{{ feed.link }}" class="btn btn-lg btn-primary">Visit website</a>
+  <a href="{{ feed.link }}" class="btn btn-primary">Visit website</a>
 </div>
 
 <div class="row" ng-repeat="entry in feed.entries track by $index">
