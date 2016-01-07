@@ -4,11 +4,14 @@ angular.module('feedReader.feedItems', ['feedReader.feedServices', 'feedReader.i
       // Use service to get RSS items from $scope.url;
       $scope.feed = {};
       $scope.selected = null;
+      $scope.error = null;
       feedsAPI.getFeed($scope.url).then(function (feed) {
         $scope.feed = feed;
         $scope.feed.entries.forEach(function(entry) {
           entry.thumbnail = getThumbnail(entry);
         });
+      }).catch(function (error) {
+        $scope.error = 'There\'s something wrong with your feed. Please check the url or try reloading the page.';
       });
     };
 
